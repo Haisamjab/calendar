@@ -14,7 +14,8 @@ let server = require('./server').http;
 gulp.task('bundle:scripts', function() {
   gulp.src('src/scripts/**/*.js')
     .pipe(gulp.$.concat('app.js'))
-    .pipe(gulp.dest('dist/js/'));
+    .pipe(gulp.dest('dist/js/'))
+    .pipe(gulp.$.livereload());
 });
 
 gulp.task('bundle:styles', function() {
@@ -28,6 +29,11 @@ gulp.task('copy:views', function() {
     .pipe(gulp.dest('dist/'));
 });
 
+gulp.task('watch', function() {
+  gulp.$.livereload.listen();
+  gulp.watch('src/scripts/**/*.js', ['bundle:scripts']);
+});
+
 gulp.task('serve', function() {
   server.listen(3000);
 });
@@ -39,4 +45,5 @@ gulp.task('default', [
   'copy:views'
 ], function() {
   gulp.run('serve');
+  gulp.run('watch');
 });

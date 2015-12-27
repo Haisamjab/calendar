@@ -1,6 +1,6 @@
 (function(module) {
   module.clickHandler = function() {
-    alert('Ciao');
+    alert('Ciao Haisam, quello la e\' un coglione');
   };
 
   document.querySelector('button').addEventListener('click', module.clickHandler);
